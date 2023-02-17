@@ -13,6 +13,8 @@ import {
   Divider,
   HStack,
 } from "@chakra-ui/react";
+import { useColorMode } from "@chakra-ui/react";
+import DarkModeToggle from "./DarkModeToggle";
 import Logout from "./Logout";
 import { BiCameraMovie } from "react-icons/bi";
 import Hamburger from "hamburger-react";
@@ -20,6 +22,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
+  const { colorMode } = useColorMode();
   const list = [
     {
       name: "Movies",
@@ -49,7 +52,7 @@ export default function Navbar() {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   const hoverEffects = {
     _hover: {
-      color: "gray.400",
+      color: `${colorMode === "dark" ? "gray.200" : "gray.700"} `,
       transition: "all 0.2s ease-in-out",
     },
   };
@@ -61,8 +64,6 @@ export default function Navbar() {
       wrap="wrap"
       w="100%"
       p={8}
-      bg="gray.800"
-      color="white"
     >
       <Flex align="center" mr={5}>
         <Heading
@@ -152,7 +153,10 @@ export default function Navbar() {
                 key={id}
                 href={href}
                 w="100%"
-                className="text-center text-gray-200 "
+                className={` 
+                  text-center
+                  ${colorMode === "light" ? "text-black" : "text-gray-400"}
+                `}
                 {...hoverEffects}
               >
                 {name}
@@ -160,6 +164,7 @@ export default function Navbar() {
             );
           })}
         </HStack>
+        <DarkModeToggle />
         <Logout />
       </Flex>
     </Flex>

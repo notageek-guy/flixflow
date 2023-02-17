@@ -7,7 +7,7 @@ interface LayoutProps {
 }
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen ">
       <Navbar />
       <main
         className={`
